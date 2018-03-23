@@ -56,6 +56,24 @@ export async function activate(context: vscode.ExtensionContext) {
             vscode.commands.executeCommand("cargo.check");
         })
     );
+
+    context.subscriptions.push(
+        vscode.commands.registerCommand('cargo.rm', async () => {
+            let cwd = util.getCwd();
+
+            let name = await vscode.window.showInputBox();
+            if (name === undefined) {
+                return;
+            }
+
+            console.log(`Removing dependency '${name}'`);
+            await cargo.rm(cwd, name).catch(logAndShowError);
+
+            vscode.window.showInformationMessage(`Successfully removed dependency '${name}'`);
+
+            vscode.commands.executeCommand("cargo.check");
+        })
+    );
 }
 
 async function with_cargo_diagnostics(rust_diagnostics: vscode.DiagnosticCollection, name: string, command: (cwd: string) => Promise<cargo.Diagnostic[]>) {

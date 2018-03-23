@@ -16,6 +16,7 @@
         "onCommand:cargo.check",
         "onCommand:cargo.build",
         "onCommand:cargo.add",
+        "onCommand:cargo.rm"
     ],
     "main": "./out/extension",
     "contributes": {
@@ -31,6 +32,10 @@
             {
                 "command": "cargo.add",
                 "title": "Cargo: Add dependency"
+            },
+            {
+                "command": "cargo.rm",
+                "title": "Cargo: Remove dependency"
             }
         ]
     },
