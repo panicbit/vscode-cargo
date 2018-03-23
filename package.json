@@ -2,6 +2,7 @@
     "name": "cargo",
     "displayName": "Cargo",
     "description": "Integration with cargo and cargo tools",
+    "version": "0.1.1",
     "publisher": "panicbit",
     "repository": "https://github.com/panicbit/vscode-cargo",
     "icon": "cargo.png",
