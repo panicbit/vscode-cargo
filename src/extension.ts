@@ -74,6 +74,8 @@ export async function activate(context: vscode.ExtensionContext) {
             vscode.commands.executeCommand("cargo.check");
         })
     );
+
+    vscode.commands.executeCommand("cargo.check");
 }
 
 async function with_cargo_diagnostics(rust_diagnostics: vscode.DiagnosticCollection, name: string, command: (cwd: string) => Promise<cargo.Diagnostic[]>) {
