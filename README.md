@@ -1,6 +1,6 @@
 # Cargo
 
-Integration with Rusts package manager Cargo
+Integration with cargo and cargo tools
 
 ## Features
 
