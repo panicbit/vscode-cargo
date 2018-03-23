@@ -1,4 +1,5 @@
 import { exec } from './util';
+import fetch from 'node-fetch';
 const { parse_json_stream } = require('.././json-stream/target/wasm32-unknown-unknown/release/json_stream.js');
 
 export interface Metadata {
@@ -75,4 +76,28 @@ export async function check(cwd: string): Promise<Diagnostic[]> {
     }
 
     return parse_json_stream(output.stdout);
+}
+
+export async function add(cwd: string, pkg: string) {
+    let { code, stderr } = await exec('cargo', ['add', '--', pkg], { cwd });
+
+    if (code !== 0) {
+        console.error(stderr);
+        throw Error("`cargo add` returned with non-zero exit code");
+    }
+}
+
+export async function search(name: string): Promise<Package[]> {
+    let response = await fetch(`https://crates.io/api/v1/crates?per_page=20&q=${name}`);
+    let json: { crates: Package[] } = await response.json();
+
+    return json.crates;
+}
+
+export interface Package {
+    name: string;
+    description: string;
+    max_version: string;
+    downloads: number;
+    recent_downloads: number;
 }

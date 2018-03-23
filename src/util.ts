@@ -8,6 +8,13 @@ export interface Output {
     code: number;
 }
 
+export function logAndShowError(error: Error) {
+    console.error(error);
+    vscode.window.showErrorMessage(error.message);
+
+    throw error;
+}
+
 export function exec(
     cmd: string,
     args?: string[],

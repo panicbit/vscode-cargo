@@ -5,6 +5,7 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 import * as cargo from './cargo';
 import * as util from './util';
+import { logAndShowError } from './util';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -17,11 +18,43 @@ export async function activate(context: vscode.ExtensionContext) {
     });
 
     context.subscriptions.push(
-        vscode.commands.registerCommand('cargo.check', async () => with_cargo_diagnostics(rust_diagnostics, 'cargo check', cargo.check)) 
+        vscode.commands.registerCommand('cargo.check', async () => with_cargo_diagnostics(rust_diagnostics, 'cargo check', cargo.check))
     );
 
     context.subscriptions.push(
-        vscode.commands.registerCommand('cargo.build', async () => with_cargo_diagnostics(rust_diagnostics, 'cargo build', cargo.build)) 
+        vscode.commands.registerCommand('cargo.build', async () => with_cargo_diagnostics(rust_diagnostics, 'cargo build', cargo.build))
+    );
+
+    context.subscriptions.push(
+        vscode.commands.registerCommand('cargo.add', async () => {
+            let cwd = util.getCwd();
+
+            let input = await vscode.window.showInputBox();
+            if (input === undefined) {
+                return;
+            }
+
+            let packages = await cargo.search(input);
+            let items = packages.map((pkg: cargo.Package): vscode.QuickPickItem => ({
+                label: pkg.name,
+                detail: `All-time DLs: ${pkg.downloads} Recent DLs: ${pkg.recent_downloads}`,
+                description: `(${pkg.max_version}) ${pkg.description}`,
+            }));
+
+            let selection: any = await vscode.window.showQuickPick(items);
+            if (selection === undefined) {
+                return;
+            }
+
+            let name = selection.label;
+
+            console.log(`Adding dependency '${name}'`);
+            await cargo.add(cwd, name).catch(logAndShowError);
+
+            vscode.window.showInformationMessage(`Successfully added dependency '${name}'`);
+
+            vscode.commands.executeCommand("cargo.check");
+        })
     );
 }
 
@@ -91,7 +124,7 @@ class Diagnosis {
         })();
 
         let formatted_message = `${message.level}: ${message.message}`;
-        
+
         if (span.label) {
             formatted_message += `\nlabel: ${span.label}`;
         }

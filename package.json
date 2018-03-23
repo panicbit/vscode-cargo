@@ -14,7 +14,8 @@
     "activationEvents": [
         "onLanguage:rust",
         "onCommand:cargo.check",
-        "onCommand:cargo.build"
+        "onCommand:cargo.build",
+        "onCommand:cargo.add",
     ],
     "main": "./out/extension",
     "contributes": {
@@ -26,6 +27,10 @@
             {
                 "command": "cargo.build",
                 "title": "Cargo: Build"
+            },
+            {
+                "command": "cargo.add",
+                "title": "Cargo: Add dependency"
             }
         ]
     },
@@ -44,5 +49,8 @@
         "@types/node": "^7.0.43",
         "@types/mocha": "^2.2.42"
     },
-    "dependencies": {}
+    "dependencies": {
+        "@types/node-fetch": "^1.6.7",
+        "node-fetch": "^2.1.1"
+    }
 }
