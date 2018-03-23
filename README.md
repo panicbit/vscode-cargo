@@ -5,12 +5,12 @@ Integration with Rusts package manager Cargo
 ## Features
 
 - Checks your code using `cargo check`
-- Commands for `cargo build` and `cargo check`
+- Commands to add end remove dependencies
 
 ## Planned Features
 
+- Quick fixes for missing dependencies
 - Commands for `cargo test`, `cargo new`
-- Support for `cargo-edit`
 
 <!--
 For example if there is an image subfolder under your extension project workspace:
