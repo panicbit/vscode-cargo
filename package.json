@@ -38,7 +38,18 @@
                 "command": "cargo.rm",
                 "title": "Cargo: Remove dependency"
             }
-        ]
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "Cargo configuration",
+            "properties": {
+                "cargo.automaticCheck": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Automatically run `cargo check`."
+                }
+            }
+        }
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",

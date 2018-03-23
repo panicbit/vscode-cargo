@@ -6,6 +6,7 @@ import * as path from 'path';
 import * as cargo from './cargo';
 import * as util from './util';
 import { logAndShowError } from './util';
+import * as config from './config';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -14,7 +15,9 @@ export async function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(rust_diagnostics);
 
     vscode.workspace.onDidSaveTextDocument((document) => {
-        vscode.commands.executeCommand("cargo.check");
+        if (config.automaticCheck()) {
+            vscode.commands.executeCommand("cargo.check");
+        }
     });
 
     context.subscriptions.push(
@@ -53,7 +56,9 @@ export async function activate(context: vscode.ExtensionContext) {
 
             vscode.window.showInformationMessage(`Successfully added dependency '${name}'`);
 
-            vscode.commands.executeCommand("cargo.check");
+            if (config.automaticCheck()) {
+                vscode.commands.executeCommand("cargo.check");
+            }
         })
     );
 
@@ -71,11 +76,15 @@ export async function activate(context: vscode.ExtensionContext) {
 
             vscode.window.showInformationMessage(`Successfully removed dependency '${name}'`);
 
-            vscode.commands.executeCommand("cargo.check");
+            if (config.automaticCheck()) {
+                vscode.commands.executeCommand("cargo.check");
+            }
         })
     );
 
-    vscode.commands.executeCommand("cargo.check");
+    if (config.automaticCheck()) {
+        vscode.commands.executeCommand("cargo.check");
+    }
 }
 
 async function with_cargo_diagnostics(rust_diagnostics: vscode.DiagnosticCollection, name: string, command: (cwd: string) => Promise<cargo.Diagnostic[]>) {

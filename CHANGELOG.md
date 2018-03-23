@@ -7,6 +7,9 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+### Added
+- Option to turn off automatic cargo check
+
 ## [0.1.1] - 2018-03-23
 
 ### Added
