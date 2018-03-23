@@ -4,6 +4,7 @@
     "description": "",
     "version": "0.0.1",
     "publisher": "panicbit",
+    "repository": "https://github.com/panicbit/vscode-cargo",
     "engines": {
         "vscode": "^1.20.0"
     },
