@@ -7,6 +7,11 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+## [0.1.1] - 2018-03-23
+
+### Added
+- Package description
+
 ## [0.1.0] - 2018-03-23
 
 ### Added
