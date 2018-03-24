@@ -11,6 +11,7 @@ Integration with cargo and cargo tools
 
 - Quick fixes for missing dependencies
 - Commands for `cargo test`, `cargo new`
+- Formatting via `cargo fmt` / `rustfmt`
 
 <!--
 For example if there is an image subfolder under your extension project workspace:
