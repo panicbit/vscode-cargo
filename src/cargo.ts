@@ -69,7 +69,7 @@ export async function build(cwd: string): Promise<Diagnostic[]> {
 }
 
 export async function check(cwd: string): Promise<Diagnostic[]> {
-    let output = await exec('cargo', ['check', '--message-format=json'], { cwd });
+    let output = await exec('cargo', ['check', '--message-format=json', '--all-targets'], { cwd });
 
     if (output.code !== 0 && output.stdout === "") {
         throw new Error(`cargo check: ${output.stderr}`);
