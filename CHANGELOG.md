@@ -7,6 +7,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+## [0.2.0] - 2018-09-03
+
 ### Added
 - Option to turn off automatic cargo check
 - All lib and bin targets are checked
