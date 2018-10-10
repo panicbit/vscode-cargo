@@ -5,7 +5,7 @@ Integration with cargo and cargo tools
 ## Features
 
 - Checks your code using `cargo check` (can be disabled)
-- Commands to add end remove dependencies
+- Commands to add and remove dependencies
 
 ## Planned Features
 
