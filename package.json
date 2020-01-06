@@ -60,14 +60,14 @@
         "test": "npm run compile && node ./node_modules/vscode/bin/test"
     },
     "devDependencies": {
-        "typescript": "^2.6.1",
-        "vscode": "^1.1.6",
-        "tslint": "^5.8.0",
-        "@types/node": "^7.0.43",
-        "@types/mocha": "^2.2.42"
+        "@types/mocha": "^2.2.42",
+        "@types/node": "^7.10.9",
+        "tslint": "^5.20.1",
+        "typescript": "^2.9.2",
+        "vscode": "^1.1.36"
     },
     "dependencies": {
-        "@types/node-fetch": "^1.6.7",
-        "node-fetch": "^2.1.1"
+        "@types/node-fetch": "^1.6.9",
+        "node-fetch": "^2.6.0"
     }
 }
