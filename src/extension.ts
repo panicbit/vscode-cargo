@@ -118,7 +118,19 @@ class Diagnosis {
             this.diagnostics.set(path, []);
         }
 
-        this.diagnostics.get(path)!.push(diagnostic);
+        let diagnostics = this.diagnostics.get(path)!;
+
+        let alreadyExisting = diagnostics.find((other) =>
+            diagnostic.code == other.code
+            && diagnostic.message == other.message
+            && diagnostic.range.isEqual(other.range)
+            && diagnostic.severity == other.severity
+            && diagnostic.source == diagnostic.source
+        );
+
+        if (!alreadyExisting) {
+            diagnostics.push(diagnostic);
+        }
     }
 
     add_cargo_diagnostics(workspaceRoot: string, diagnostics: cargo.Diagnostic[]) {
