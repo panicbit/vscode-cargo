@@ -2,12 +2,14 @@
 name = "json-stream"
 version = "0.1.0"
 authors = ["panicbit <panicbit.dev@gmail.com>"]
+edition = "2018"
 
 [lib]
-crate-type = ["cdylib"]
+crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-stdweb = "0.4.2"
-serde_json = "1.0.12"
-serde_derive = "1.0.33"
-serde = "1.0.33"
+wasm-bindgen = { version = "0.2.57", features = ["serde-serialize"] }
+serde_json = "1.0.44"
+web-sys = { version = "0.3.34", features = ['console'] }
+# serde_derive = "1.0.104"
+# serde = "1.0.104"

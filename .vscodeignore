@@ -8,5 +8,3 @@ tsconfig.json
 vsc-extension-quickstart.md
 tslint.json
 json-stream/**
-!json-stream/target/**/*.js
-!json-stream/target/**/*.wasm

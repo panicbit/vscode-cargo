@@ -1,24 +1,15 @@
-#![feature(proc_macro)]
-
-#[macro_use]
-extern crate serde_derive;
 extern crate serde_json as json;
-#[macro_use]
-extern crate stdweb;
 
-use stdweb::js_export;
+use wasm_bindgen::prelude::*;
 
-#[derive(Deserialize, Serialize)]
-struct Value(json::Value);
+use wasm_bindgen::JsValue;
 
-js_serializable!(Value);
-
-#[js_export]
-fn parse_json_stream(stream: &str) -> Value {
+#[wasm_bindgen]
+pub fn parse_json_stream(stream: &str) -> JsValue {
     let res = json::Deserializer::from_str(stream)
         .into_iter()
         .flat_map(|m| m)
         .collect::<Vec<json::Value>>();
 
-    Value(res.into())
+    JsValue::from_serde(&res).unwrap()
 }

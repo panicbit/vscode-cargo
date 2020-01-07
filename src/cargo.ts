@@ -1,6 +1,6 @@
 import { exec } from './util';
 import fetch from 'node-fetch';
-const { parse_json_stream } = require('.././json-stream/target/wasm32-unknown-unknown/release/json_stream.js');
+import { parse_json_stream } from 'json-stream';
 
 export interface Metadata {
     workspace_root: string;
