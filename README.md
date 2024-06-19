@@ -2,16 +2,13 @@
 
 Integration with cargo and cargo tools
 
+## Deprecation
+
+This extension is planned to be deprecated as soon as `rust-analyzer` implements `cargo add` and `cargo rm` functionality.
+See https://github.com/rust-lang/rust-analyzer/issues/16443
+
 ## Features
-
-- Checks your code using `cargo check` (can be disabled)
 - Commands to add and remove dependencies
-
-## Planned Features
-
-- Quick fixes for missing dependencies
-- Commands for `cargo test`, `cargo new`
-- Formatting via `cargo fmt` / `rustfmt`
 
 <!--
 For example if there is an image subfolder under your extension project workspace:
