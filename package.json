@@ -2,34 +2,22 @@
     "name": "cargo",
     "displayName": "Cargo",
     "description": "Integration with cargo and cargo tools",
-    "version": "0.2.3",
+    "version": "0.3.0",
     "publisher": "panicbit",
     "repository": "https://github.com/panicbit/vscode-cargo",
     "icon": "cargo.png",
     "engines": {
-        "vscode": "^1.20.0"
+        "vscode": "^1.75.0"
     },
     "categories": [
         "Other"
     ],
     "activationEvents": [
-        "onLanguage:rust",
-        "onCommand:cargo.check",
-        "onCommand:cargo.build",
-        "onCommand:cargo.add",
-        "onCommand:cargo.rm"
+        "onLanguage:rust"
     ],
-    "main": "./out/extension",
+    "main": "./out/extension.js",
     "contributes": {
         "commands": [
-            {
-                "command": "cargo.check",
-                "title": "Cargo: Check"
-            },
-            {
-                "command": "cargo.build",
-                "title": "Cargo: Build"
-            },
             {
                 "command": "cargo.add",
                 "title": "Cargo: Add dependency"
@@ -38,36 +26,28 @@
                 "command": "cargo.rm",
                 "title": "Cargo: Remove dependency"
             }
-        ],
-        "configuration": {
-            "type": "object",
-            "title": "Cargo configuration",
-            "properties": {
-                "cargo.automaticCheck": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "Automatically run `cargo check`."
-                }
-            }
-        }
+        ]
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
-        "cargo": "cd json-stream && wasm-pack build --target nodejs",
-        "compile": "npm run cargo && npx tsc -p ./",
+        "compile": "tsc -p ./",
         "watch": "tsc -watch -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+        "pretest": "npm run compile && npm run lint",
+        "lint": "eslint src --ext ts",
+        "test": "vscode-test"
     },
     "devDependencies": {
-        "@types/mocha": "^2.2.42",
-        "@types/node": "^7.10.9",
-        "tslint": "^5.20.1",
-        "typescript": "^3.7",
-        "vscode": "^1.1.36"
+        "@types/vscode": "^1.90.0",
+        "@types/mocha": "^10.0.6",
+        "@types/node": "20.x",
+        "@typescript-eslint/eslint-plugin": "^7.11.0",
+        "@typescript-eslint/parser": "^7.11.0",
+        "eslint": "^8.57.0",
+        "typescript": "^5.4.5",
+        "@vscode/test-cli": "^0.0.9",
+        "@vscode/test-electron": "^2.4.0"
     },
     "dependencies": {
-        "json-stream": "file:./json-stream/pkg",
         "@types/node-fetch": "^1.6.9",
         "node-fetch": "^2.6.0"
     }
